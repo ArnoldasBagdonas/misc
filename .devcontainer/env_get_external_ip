@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Get the external IP address using curl and checkip service
+NetworkIP=$(curl -s checkip.amazonaws.com)
+
+# Check if the IP address is empty
+if [ -z "$NetworkIP" ]; then
+  echo "Failed to obtain the IP address."
+  exit 1
+fi
+
+echo "IP address: $NetworkIP"
+
+# Write the $NetworkIP address to the .devcontainer/.env file
+echo "REACT_NATIVE_PACKAGER_HOSTNAME=$NetworkIP" > .devcontainer/.env

@@ -1,0 +1,14 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/workspace
+    env_file:
+      - .devcontainer/.env  # Variables from the .env file
+    environment:
+      - WORKSPACE=/workspace

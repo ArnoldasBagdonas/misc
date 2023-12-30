@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Get the first UP network interface with an assigned IP address
+NetworkInterface=$(ip -4 addr show | awk '/state UP/ {print $2}' | head -n 1)
+
+# Specify the network interface you want to get the IP address for
+#NetworkInterface="enp0s3"
+
+# Check if a UP interface is found
+if [ -z "$NetworkInterface" ]; then
+  echo "No UP network interface found."
+  exit 1
+fi
+
+# Get the IP address of the UP interface
+NetworkIP=$(ip -4 addr show $NetworkInterface | grep -oP '(?<=inet )([0-9.]+)' | head -n 1)
+
+# Check if the IP address is empty
+if [ -z "$NetworkIP" ]; then
+  echo "Failed to obtain the IP address for the UP network interface."
+  exit 1
+fi
+
+echo "Network Interface: $NetworkInterface"
+echo "IP address: $NetworkIP"
+
+# Write the $NetworkIP address to the .devcontainer/.env file
+echo "REACT_NATIVE_PACKAGER_HOSTNAME=$NetworkIP" > .devcontainer/.env

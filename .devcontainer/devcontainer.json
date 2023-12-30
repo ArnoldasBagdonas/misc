@@ -1,0 +1,42 @@
+{
+    "name": "Full Stack React",
+    
+    //Reference: https://github.com/microsoft/vscode-remote-release/issues/4568
+    "initializeCommand": [".devcontainer/env_get_external_ip"],
+    
+    // Use 'postCreateCommand' to run commands after the container is created.
+    //"postCreateCommand": ".devcontainer/postCreateCommand.sh",
+
+    "dockerComposeFile": "../docker-compose.yml",
+
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // In VSCode settings "Remote: Local Port Host", set to "allInterfaces"
+    // Reference: https://stackoverflow.com/questions/67983378/specify-listening-address-0-0-0-0-for-forwarded-port-in-vscode-remote-containers
+    "forwardPorts": [3000, 8081, 19006, 19000, 19001, 19002],
+
+    "service": "app",
+    
+    "workspaceFolder": "/workspace",
+
+    // Configure tool-specific properties.
+    "customizations": {
+      "vscode": {
+        
+        "settings": {
+          // VS Code settings for the development container
+        },
+        
+        // Visual Studio Code extensions to install inside the container
+        "extensions": [
+          //"dbaeumer.vscode-eslint",
+          //"esbenp.prettier-vscode",
+          // Add other extensions as needed
+          "msjsdiag.vscode-react-native",
+          "rvest.vs-code-prettier-eslint",
+          "leizongmin.node-module-intellisense"
+        ]
+
+      }
+    }
+  }
+  
